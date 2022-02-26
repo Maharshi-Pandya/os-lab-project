@@ -36,7 +36,7 @@ exports.create = async (req, res) => {
     // Ok process is valid. Insert into DB
     const dbResult = await DB.insert(processToAdd).into("process");
     res.json({
-        "statusCode": "200",
+        "statusCode": 200,
         "status": "OK",
         "message": "Process created and saved!"
     });
