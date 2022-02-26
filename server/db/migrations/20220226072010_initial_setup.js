@@ -5,9 +5,10 @@
 exports.up = function(knex) {
   return knex.schema.createTable('process', (table) => {
       table.increments("id");
-      table.integer("arrTime").notNullable();
-      table.integer("exeTime").notNullable();
-      table.integer("serTime").notNullable();
+      table.string("pname", 100).notNullable();
+      table.integer("arr_time").notNullable();
+      table.integer("exe_time").notNullable();
+      table.integer("ser_time").notNullable();
   })
 };
 
