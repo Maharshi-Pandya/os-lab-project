@@ -4,6 +4,7 @@ const cors = require("cors");
 // import routes
 const homeRouter = require("./routes/index");
 const processesRouter = require("./routes/processes");
+const createRouter = require("./routes/createProcess");
 
 // init app
 const app = express();
@@ -15,5 +16,6 @@ app.use(cors());
 // REST endpoints
 app.use("/", homeRouter);
 app.use("/processes", processesRouter);
+app.use("/create", createRouter);
 
 module.exports = app;
