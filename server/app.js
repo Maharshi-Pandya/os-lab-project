@@ -5,6 +5,7 @@ const cors = require("cors");
 const homeRouter = require("./routes/index");
 const processesRouter = require("./routes/processes");
 const createRouter = require("./routes/createProcess");
+const deleteRouter = require("./routes/deleteProcess");
 
 // init app
 const app = express();
@@ -17,5 +18,6 @@ app.use(cors());
 app.use("/", homeRouter);
 app.use("/processes", processesRouter);
 app.use("/create", createRouter);
+app.use("/delete", deleteRouter);
 
 module.exports = app;

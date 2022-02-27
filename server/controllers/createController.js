@@ -3,7 +3,7 @@ const DB = require("../services/DB");
 
 // function to validate if the process is a valid one
 validateProcess = (process) => {
-    return (process.pname != "" && process.arr_time >= 0 && process.exe_time > 0
+    return (process.pid >= 0 && process.pname != "" && process.arr_time >= 0 && process.exe_time > 0
     && process.ser_time > 0)
 }
 
@@ -11,10 +11,11 @@ exports.create = async (req, res) => {
     // console.log("Request body:", req.body);
 
     // destructure the request body
-    let {pname, arr_time, exe_time, ser_time, priority} = req.body;
+    let {pid, pname, arr_time, exe_time, ser_time, priority} = req.body;
 
     // to be inserted into DB 
     let processToAdd = {
+        pid,
         pname,
         arr_time,
         exe_time,
@@ -34,7 +35,17 @@ exports.create = async (req, res) => {
     }
 
     // Ok process is valid. Insert into DB
-    const dbResult = await DB.insert(processToAdd).into("process");
+    try {
+        const dbResult = await DB.insert(processToAdd).into("process");        
+    } catch (error) {
+        return res.json({
+            "statusCode": 400,
+            "status": "NO",
+            "message": "Cannot insert into Database. Provide valid inputs!"
+        })
+    }
+
+    // Success
     res.json({
         "statusCode": 200,
         "status": "OK",
