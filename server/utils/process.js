@@ -15,6 +15,8 @@ class Process {
         this.arrTime = arrTime;
         this.exeTime = exeTime;
         this.serTime = serTime;
+
+        this.waitTime = -1;
         this.isExecuting = false;
     }
 }
