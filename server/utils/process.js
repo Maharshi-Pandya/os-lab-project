@@ -9,13 +9,13 @@
     serTime: Service time of the process
 */
 class Process {
-    constructor(pid, pName, arrTime, exeTime, serTime) {
+    constructor(pid, pName, arrTime, exeTime) {
         this.pid = pid;
         this.pname = pName;
         this.arrTime = arrTime;
         this.exeTime = exeTime;
-        this.serTime = serTime;
-
+        
+        this.tarTime = -1;
         this.waitTime = -1;
         this.isExecuting = false;
     }

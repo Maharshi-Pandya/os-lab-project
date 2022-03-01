@@ -16,12 +16,15 @@
 
 const Process = require("../utils/process");
 const Queue = require("../utils/queue");
+const calcAverage = require("../utils/calcAverage");
 
 // Simulation time step
 const timeStep = 1;
 let readyQueue = new Queue();
-let waitingTimes = [];
 
+let waitingTimes = [];
+let tarTimes = [];          // turn around times
+let orderOfProcesses = [];  // gannt order of execution
 
 // Adds the process to ready queue
 const addToReadyQueue = (proc) => {
@@ -47,7 +50,10 @@ const checkKillProcess = (currTime, startTime, proc) => {
         if(currTime - startTime === proc.exeTime) {
             proc.isExecuting = false;
             proc.waitTime = startTime - proc.arrTime;
+            proc.tarTime = currTime - proc.arrTime;
+
             waitingTimes.push(proc.waitTime);
+            tarTimes.push(proc.tarTime);
             // console.log(`${proc.pid} is killed...`);
         }
     }
@@ -68,7 +74,8 @@ const checkWhichArrived = (currTime, processes) => {
 const removeFromList = (proc, processes) => {
     for(let i=0; i<processes.length; i++) {
         if(proc === processes[i]) {
-            processes.splice(i, 1);
+            let procArr = processes.splice(i, 1);
+            orderOfProcesses.push(procArr[0]);
         }
     }
 }
@@ -80,6 +87,10 @@ const Simulate = (processes) => {
     let currTime = 0;
     let currExecuting = null;       // which Process is executing currently?
     let currExecStartTime = 0;      // when did it start its execution?
+
+    waitingTimes = [];
+    tarTimes = [];
+    orderOfProcesses = [];
     
     // Infinite loop
     while(1) {
@@ -121,14 +132,14 @@ const Simulate = (processes) => {
 //   }
 
 // Testing
-let p2 = new Process(2, "P1", 1, 3, 0);
-let p1 = new Process(1, "P2", 2, 8, 0);
-let p3 = new Process(3, "P3", 3, 6, 0);
-let p4 = new Process(4, "P4", 5, 4, 0);
-let p5 = new Process(5, "P3", 7, 2, 0);
+let p2 = new Process(1, "P1", 2, 6, 0);
+let p1 = new Process(2, "P2", 5, 2, 0);
+let p3 = new Process(3, "P3", 1, 8, 0);
+let p4 = new Process(4, "P4", 0, 3, 0);
+let p5 = new Process(5, "P3", 4, 4, 0);
 
 let procs = [p1, p2, p3, p4, p5];
 
 let t = Simulate(procs);
 console.log("FCFS done at time:", t);
-console.log(waitingTimes);
+console.log("Average waiting time:", calcAverage.average(waitingTimes));
