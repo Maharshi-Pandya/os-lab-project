@@ -1,6 +1,5 @@
 // The SJF algorithm (Preemptive version)
 
-const Process = require("../utils/process");
 const calcAverage = require("../utils/calcAverage");
 
 // Global vars

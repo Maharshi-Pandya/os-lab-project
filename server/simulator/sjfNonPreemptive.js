@@ -4,7 +4,6 @@
 // from the ready queue.
 // Rest everything is the same as FCFS!
 
-const Process = require("../utils/process");
 const Queue = require("../utils/queue");
 const calcAverage = require("../utils/calcAverage");
 

@@ -14,7 +14,6 @@
 //     - If the process is finished executing, we kill it and remove it from the list
 // 3) We stop the algorithm when no Process is left to execute in the original list
 
-const Process = require("../utils/process");
 const Queue = require("../utils/queue");
 const calcAverage = require("../utils/calcAverage");
 
