@@ -59,7 +59,11 @@ const simulate = (processes) => {
 
         // Reduce remaining time of current process
         rt[shortest].remTime -= timeStep;
-        orderOfProcesses.push(processes[shortest]);
+
+        // push only if processes pid is different from previous one
+        let lenO = orderOfProcesses.length;
+        if(lenO <= 0 || orderOfProcesses[lenO - 1].pid != processes[shortest].pid)
+            orderOfProcesses.push(processes[shortest]);
         
         // update minRt and if remTime gets to 0, set it back to infinity
         minRt = rt[shortest].remTime;
@@ -104,6 +108,10 @@ const simulate = (processes) => {
 
 // Final function to return all results
 const SimulateAndReturn = (processes) => {
+    waitingTimes = [];
+    tarTimes = [];          // turn around times
+    orderOfProcesses = [];  // gannt order of execution
+
     let endTime = simulate(processes);
     let avgWaitTime = findAvgWaitingTime();
 

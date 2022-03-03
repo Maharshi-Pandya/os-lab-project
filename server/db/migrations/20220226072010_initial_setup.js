@@ -9,7 +9,6 @@ exports.up = function(knex) {
       table.string("pname", 100).notNullable();
       table.integer("arr_time").notNullable();
       table.integer("exe_time").notNullable();
-      table.integer("ser_time").notNullable();
       table.integer("priority").nullable();
   })
 };

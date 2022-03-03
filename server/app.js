@@ -6,6 +6,7 @@ const homeRouter = require("./routes/index");
 const processesRouter = require("./routes/processes");
 const createRouter = require("./routes/createProcess");
 const deleteRouter = require("./routes/deleteProcess");
+const simulateRouter = require("./routes/simulate");
 
 // init app
 const app = express();
@@ -19,5 +20,6 @@ app.use("/", homeRouter);
 app.use("/processes", processesRouter);
 app.use("/create", createRouter);
 app.use("/delete", deleteRouter);
+app.use("/simulate", simulateRouter);
 
 module.exports = app;

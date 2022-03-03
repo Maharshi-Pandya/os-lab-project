@@ -142,6 +142,10 @@ const simulate = (processes) => {
 
 // Final function to return all results
 const SimulateAndReturn = (processes) => {
+    waitingTimes = [];
+    tarTimes = [];          // turn around times
+    orderOfProcesses = [];  // gannt order of execution
+
     let endTime = simulate(processes);
     let avgWaitTime = findAvgWaitingTime();
 

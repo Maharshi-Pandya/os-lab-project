@@ -9,9 +9,9 @@
     .then(() => {
       // Inserts seed entries
       return knex('process').insert([
-        { pid: 11, pname: "P1", arr_time: 0, exe_time: 1, ser_time: 3},
-        { pid: 233, pname: "P2", arr_time: 1, exe_time: 4, ser_time: 2},
-        { pid: 45, pname: "P3", arr_time: 3, exe_time: 5, ser_time: 4},        
+        { pid: 11, pname: "P1", arr_time: 0, exe_time: 1},
+        { pid: 233, pname: "P2", arr_time: 1, exe_time: 4},
+        { pid: 45, pname: "P3", arr_time: 3, exe_time: 5},        
       ]);
     });
 };
