@@ -16,6 +16,16 @@ let waitingTimes = [];
 let tarTimes = [];          // turn around times
 let orderOfProcesses = [];  // gannt order of execution
 
+const findAvgWaitingTime = () => {
+    let wts = [];
+
+    for(let i=0; i<waitingTimes.length; i++) {
+        wts.push(waitingTimes[i].wt);
+    }
+
+    return calcAverage.average(wts);
+}
+
 // Adds the process to ready queue
 const addToWaitingQueue = (proc) => {
     if(proc) {
@@ -42,8 +52,14 @@ const checkKillProcess = (currTime, startTime, proc) => {
             proc.waitTime = startTime - proc.arrTime;
             proc.tarTime = currTime - proc.arrTime;
 
-            waitingTimes.push(proc.waitTime);
-            tarTimes.push(proc.tarTime);
+            waitingTimes.push({
+                pid: proc.pid,
+                wt: proc.waitTime
+            });
+            tarTimes.push({
+                pid: proc.pid,
+                tar: proc.tarTime
+            });
             // console.log(`${proc.pid} is killed...`);
         }
     }
@@ -91,7 +107,7 @@ const findMinBurTime = (waitingQueue) => {
 
 // Simulate
 // Driver code
-const Simulate = (processes) => {
+const simulate = (processes) => {
     let currTime = 0;
     let currExecuting = null;
     let currExecStartTime = 0;
@@ -99,7 +115,6 @@ const Simulate = (processes) => {
     // Infinite loop
     while(1) {
         if(processes.length <= 0) {
-            console.log("Done...");
             return currTime;
         }
 
@@ -111,7 +126,6 @@ const Simulate = (processes) => {
                 proc.isExecuting = true;
                 currExecuting = proc;
                 currExecStartTime = currTime;
-                console.log(`${currExecuting.pid} started at time ${currExecStartTime}`);
             }
         }
 
@@ -126,6 +140,21 @@ const Simulate = (processes) => {
     }
 }
 
+// Final function to return all results
+const SimulateAndReturn = (processes) => {
+    let endTime = simulate(processes);
+    let avgWaitTime = findAvgWaitingTime();
+
+    let result = {
+        "simulationEndTime": endTime,
+        "averageWaitingTime": avgWaitTime,
+        "waitingTimes": waitingTimes,
+        "turnAroundTimes": tarTimes,
+        "ganttChart": orderOfProcesses
+    }
+    return result;
+}
+
 // // Sleep function for debugging if necessary
 // function sleep(ms) {
 //     return new Promise((resolve) => {
@@ -133,15 +162,18 @@ const Simulate = (processes) => {
 //     });
 //   }
 
-// Testing
-let p2 = new Process(1, "P1", 2, 6, 0);
-let p1 = new Process(2, "P2", 5, 2, 0);
-let p3 = new Process(3, "P3", 1, 8, 0);
-let p4 = new Process(4, "P4", 0, 3, 0);
-let p5 = new Process(5, "P3", 4, 4, 0);
+// // Testing
+// let p2 = new Process(1, "P1", 2, 6, 0);
+// let p1 = new Process(2, "P2", 5, 2, 0);
+// let p3 = new Process(3, "P3", 1, 8, 0);
+// let p4 = new Process(4, "P4", 0, 3, 0);
+// let p5 = new Process(5, "P3", 4, 4, 0);
 
-let procs = [p1, p2, p3, p4, p5];
+// let procs = [p1, p2, p3, p4, p5];
 
-let t = Simulate(procs);
-console.log("FCFS done at time:", t);
-console.log("Average waiting time:", calcAverage.average(waitingTimes));
+// let res = SimulateAndReturn(procs);
+// console.log(res);
+
+module.exports = {
+    SimulateAndReturn
+}
