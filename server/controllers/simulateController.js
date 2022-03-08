@@ -16,7 +16,8 @@ const DB = require("../services/DB");
 // simulators
 const Fcfs = require("../simulator/fcfs");
 const Sjfn = require("../simulator/sjfNonPreemptive"); 
-const Sjfp = require("../simulator/sjfPreemptive"); 
+const Sjfp = require("../simulator/sjfPreemptive");
+const Rr = require("../simulator/rr");
 
 // utils
 const Process = require("../utils/process");
@@ -46,16 +47,21 @@ exports.simulate = async (req, res) => {
         case "SJFP":
             response = Sjfp.SimulateAndReturn(processes);
             break;
+        case "RR":
+            response = Rr.SimulateAndReturn(processes);
+            break;
         default:
             response = {
                 "statusCode": 400,
                 "status": "NO",
-                "message": "Please provide a valid algorithm to simulate"
+                "message": "Please provide a valid algorithm to run the simulation :("
             }
             break;
     }
 
     return res.json({
+        "statusCode": 200,
+        "status": "OK",
         "simulationResult": response
     });
 }
