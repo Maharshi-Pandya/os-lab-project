@@ -7,7 +7,7 @@ module.exports = {
   client: 'postgresql',
   connection: {
     host: 'localhost',
-    database: 'os-lab',
+    database: 'oslab',
     user: 'admin',
     password: 'admin'
   },
