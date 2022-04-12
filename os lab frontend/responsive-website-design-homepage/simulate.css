@@ -1,0 +1,26 @@
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(Processor_5F00_hero.jpg);
+  height: 100vh;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  color: #d2d3eb;
+}
+h1 {
+  color: darkorange;
+}
+div {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  margin: 12% 28%;
+  text-align: center;
+}
