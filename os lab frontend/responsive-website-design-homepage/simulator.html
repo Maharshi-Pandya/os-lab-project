@@ -15,33 +15,51 @@
 
         <h1>SIMULATOR</h1>
         <br>
-        <form action="">
-            <label for="name">Name Of Algorithm:</label>
-            <select name="name" id="algo">
+        <form id="process_form" action="">
+            <label for="pid">Process ID:</label>
+            <input type="number" name="pid" id="pid" autocomplete="off">
+            <br>
+            <br>
+            <label for="pname">Process Name:</label>
+            <input type="text" name="pname" id="pname" autocomplete="off">
+            <br>
+            <br>
+            <label for="arr_time">Arrival Time:</label>
+            <input type="text" name="arr_time" id="arr_time" autocomplete="off">
+            <br>
+            <br>
+            <label for="exe_time">Execution Time:</label>
+            <input type="text" name="exe_time" id="exe_time" autocomplete="off">
+            <br>
+            <br>
+            <button class="btn" id="add_proc" type="submit">Add Process</button>&nbsp;&nbsp;&nbsp;
+            <br>
+        </form>
+        <br>
+        <form id="del_proc" action="">
+            <label for="pid">Process ID:</label>
+            <input type="number" name="pid" id="pid" autocomplete="off">
+            <br>
+            <br>
+            <button class="btn" id="del_proc" type="submit">Delete Process</button>
+        </form>
+        <br>
+        <form id="sim_form" action="">
+            <label for="algo_name">Name Of Algorithm:</label>
+            <select name="algo" id="algo">
                 <option value="FCFS">FCFS (First Come First Serve)</option>
-                <option value="SJN">SJN (Shortest Job First)</option>
-                <option value="PBS">Priority Based Scheduling</option>
+                <option value="SJFP">SJF (Shortest Job First)</option>
+                <option value="SJFN">SJF (Non Preemptive)</option>
                 <option value="RR"> RR (Round Robin Scheduling)</option>
             </select>
             <br>
             <br>
-            <br>
-            <label for="name">Process ID:</label>
-            <input type="number" name="processID" id="iD">
-            <br>
-            <br>
-            <label for="name">Arrival Time:</label>
-            <input type="text" name="" id="">
-            <br>
-            <br>
-            <label for="name">Execution Time:</label>
-            <input type="text" name="" id="">
-            <br>
-            <br>
-            <button>Simulate</button>
+            <button class="btn" type="submit">Simulate</button>
         </form>
 
     </div>
+
+    <script src="js/simulate.js"></script>
 </body>
 
 </html>
