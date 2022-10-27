@@ -14,7 +14,7 @@ The algorithms implemented are:
 ### How it looks?
 
 ![OS Lab Simulator](./docs/oslab.png)
-
+![OS Lab Simulator](./docs/oslab2.png)
 
 
 ### Tech Stack
